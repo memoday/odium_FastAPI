@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from datetime import datetime
+from pytz import timezone
 
 app = FastAPI()
 # app.mount("/", StaticFiles(directory="public", html = True), name="static")
@@ -8,6 +9,6 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    testNum = datetime.now()
+    testNum = datetime.now(timezone('Asia/Seoul')).strftime('%Y-%m-%d %H:%M:%S')
     return {"date": testNum}
 
