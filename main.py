@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from datetime import datetime
+import socket
 
 app = FastAPI()
 # app.mount("/", StaticFiles(directory="public", html = True), name="static")
@@ -9,5 +10,6 @@ app = FastAPI()
 @app.get("/")
 async def root():
     testNum = datetime.now()
-    return {"date": testNum}
+    myIp = socket.gethostbyname(socket.gethostname())
+    return {"date": testNum,"IP": myIp}
 
