@@ -34,5 +34,5 @@ def symbolCount():
 async def root():
     nowLevel, nowValue = symbolCount()
     testNum = datetime.now(timezone('Asia/Seoul')).strftime('%Y-%m-%d')
-    return {"nowLevel" : nowValue, "nowValue" : nowValue,"date": testNum}
+    return {"nowLevel" : nowLevel, "nowValue" : nowValue,"date": testNum}
 
