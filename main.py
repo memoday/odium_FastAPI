@@ -50,7 +50,6 @@ def symbolCount():
 
 @app.get("/")
 async def root():
-    nowLevel, nowValue = symbolCount()
     return {"date": symbol['date'],
             "currentLevel" : symbol['currentLevel'], 
             "currentValue" : symbol['currentValue'],
@@ -59,7 +58,4 @@ async def root():
             "daysToNextLevel" : symbol['daysToNextLevel'],
             "dateToNextLevel" : symbol['dateToNextLevel'],
             }
-
-if __name__ == "__main__":
-    print(symbolCount())
 
