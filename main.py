@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from datetime import datetime, timedelta
 from pytz import timezone
+import math
 
 app = FastAPI()
 # app.mount("/", StaticFiles(directory="public", html = True), name="static")
@@ -31,7 +32,7 @@ def symbolCount():
 
     nowLevelMaxValue = maxLevel[i]
     countsToNextLevel = maxLevel[i] - nowValue
-    daysToNextLevel = int(countsToNextLevel/5) #math.ceil 써야지 올림됨 임시!!
+    daysToNextLevel = math.ceil(countsToNextLevel/5) #math.ceil 써야지 올림됨 임시!!
     dateToNextLevel = today + timedelta(days=daysToNextLevel)
     dateToNextLevel = datetime.strftime(dateToNextLevel,'%Y.%m.%d')
 
