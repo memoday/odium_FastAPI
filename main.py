@@ -36,6 +36,8 @@ def symbolCount():
     dateToNextLevel = today + timedelta(days=daysToNextLevel)
     dateToNextLevel = datetime.strftime(dateToNextLevel,'%Y.%m.%d')
 
+    authenticForce = nowLevel*10 + 220
+
     global symbol
     symbol = {
         'date' : td,
@@ -45,9 +47,11 @@ def symbolCount():
         'countsToNextLevel' : countsToNextLevel,
         'daysToNextLevel' : daysToNextLevel,
         'dateToNextLevel' : dateToNextLevel,
+        'authenticForce' : authenticForce,
     }
 
     return symbol
+
 
 @app.get("/")
 async def root():
@@ -59,5 +63,6 @@ async def root():
             "countsToNextLevel" : symbol['countsToNextLevel'],
             "daysToNextLevel" : symbol['daysToNextLevel'],
             "dateToNextLevel" : symbol['dateToNextLevel'],
+            'authenticForce' : symbol['authenticForce'],
             }
 
