@@ -21,7 +21,7 @@ def symbolCount():
     difference = today - publishedDate
     
     dailyCount = difference.days * 5 #일퀘 심볼 개수
-    addition = 180 #이벤트 심볼
+    addition = 280 #이벤트 심볼
 
     nowValue = nowValue + int(dailyCount) + addition
 
@@ -65,4 +65,3 @@ async def root():
             "dateToNextLevel" : symbol['dateToNextLevel'],
             'authenticForce' : symbol['authenticForce'],
             }
-
