@@ -10,9 +10,9 @@ symbols = { #기본 설정
         "releaseDate" : datetime.strptime('2022.12.09', '%Y.%m.%d'),
     },
     "new" : {
-        "startValue" : 5,
+        "startValue" : 0,
         "additionValue" : 0,
-        "dailyValue" : 5,
-        "releaseDate" : datetime.strptime('2023.06.01', '%Y.%m.%d'),
+        "dailyValue" : 0,
+        "releaseDate" : datetime.strptime('2023.05.01', '%Y.%m.%d'),
     },
 }

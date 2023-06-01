@@ -10,7 +10,9 @@ app = FastAPI()
 # app.mount("/", StaticFiles(directory="public", html = True), name="static")
 
 def getSymbolData():
-    result = {}
+    result = {
+        'authenticForce' : 220, #세르니움, 아르크스 만렙 적용
+    }
 
     #기본 데이터
     today = datetime.now(timezone('Asia/Seoul')).strftime('%Y.%m.%d')
@@ -44,7 +46,8 @@ def getSymbolData():
         currentLevelMaxValue = maxLevel[currentLevel]
 
         #현재 어센틱포스
-        authenticForce = currentLevel*10 + 220
+        authenticForce = currentLevel*10
+        result['authenticForce'] += authenticForce
 
         #레벨 업까지 남은 개수
         countsToNextLevel = currentLevelMaxValue - currentValue
@@ -65,7 +68,6 @@ def getSymbolData():
         symbols["countsToNextLevel"] = countsToNextLevel
         symbols["daysToNextLevel"] = daysToNextLevel
         symbols["dateToNextLevel"] = dateToNextLevel
-        symbols["authenticForce"] = authenticForce
 
     return result
 
