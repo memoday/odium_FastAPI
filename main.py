@@ -67,7 +67,7 @@ def getSymbolData():
         symbols["dateToNextLevel"] = dateToNextLevel
         symbols["authenticForce"] = authenticForce
 
-        return result
+    return result
 
 @app.get("/")
 async def root():

@@ -7,12 +7,12 @@ symbols = { #기본 설정
         "startValue" : 742, #첫 심볼 개수
         "additionValue" : 280, #이벤트 심볼 개수
         "dailyValue" : 5, #일퀘 개수
-        "releaseDate" : datetime.strptime('2022.12.09','%Y.%m.%d'),
+        "releaseDate" : datetime.strptime('2022.12.09', '%Y.%m.%d'),
     },
     "new" : {
         "startValue" : 5,
         "additionValue" : 0,
         "dailyValue" : 5,
-        "releaseDate" : datetime.strptime('2023.06.01','%Y.%m.%d'),
-    }
+        "releaseDate" : datetime.strptime('2023.06.01', '%Y.%m.%d'),
+    },
 }
