@@ -1,67 +1,76 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
 from datetime import datetime, timedelta
 from pytz import timezone
 import math
+import symbol_dict
+import json
 
 app = FastAPI()
 # app.mount("/", StaticFiles(directory="public", html = True), name="static")
 
-def symbolCount():
+def getSymbolData():
+    result = {}
+
+    #기본 데이터
     today = datetime.now(timezone('Asia/Seoul')).strftime('%Y.%m.%d')
-    td = today
     today = datetime.strptime(today,'%Y.%m.%d')
 
-    nowValue = 742
-    i = 0
     maxLevel = [0, 29, 76, 141, 224, 325, 444, 581, 736, 909, 1100]
-    nowLevel = i
-    publishedDate = datetime.strptime('2022.12.09','%Y.%m.%d')
 
-    difference = today - publishedDate
-    
-    dailyCount = difference.days * 5 #일퀘 심볼 개수
-    addition = 280 #이벤트 심볼
+    #심볼값 계산
+    for symbolName in symbol_dict.symbols.keys():
+        symbol_data = symbol_dict.symbols[symbolName]
 
-    nowValue = nowValue + int(dailyCount) + addition
+        startValue = symbol_data["startValue"]
+        additionValue = symbol_data["additionValue"]
+        dailyValue = symbol_data["dailyValue"]
+        releaseDate = symbol_data["releaseDate"]
+        currentLevel = 0
 
-    while(nowValue > maxLevel[i]):
-        nowValue = nowValue - maxLevel[i]
-        i += 1
-        nowLevel = i
+        #일퀘 개수 추가
+        days = today - releaseDate
+        dailyCount = dailyValue * days.days
+        
+        #현재 심볼값
+        currentValue = startValue + additionValue + dailyCount
 
-    nowLevelMaxValue = maxLevel[i]
-    countsToNextLevel = maxLevel[i] - nowValue
-    daysToNextLevel = math.ceil(countsToNextLevel/5) #math.ceil 써야지 올림됨 임시!!
-    dateToNextLevel = today + timedelta(days=daysToNextLevel)
-    dateToNextLevel = datetime.strftime(dateToNextLevel,'%Y.%m.%d')
+        #현재 심볼 레벨
+        while(currentValue > maxLevel[currentLevel]):
+            currentValue = currentValue - maxLevel[currentLevel]
+            currentLevel += 1
 
-    authenticForce = nowLevel*10 + 220
+        #현재 레벨 최대 개수
+        currentLevelMaxValue = maxLevel[currentLevel]
 
-    global symbol
-    symbol = {
-        'date' : td,
-        'currentLevel' : nowLevel,
-        'currentValue' : nowValue,
-        'currentLevelMaxValue' : nowLevelMaxValue,
-        'countsToNextLevel' : countsToNextLevel,
-        'daysToNextLevel' : daysToNextLevel,
-        'dateToNextLevel' : dateToNextLevel,
-        'authenticForce' : authenticForce,
-    }
+        #현재 어센틱포스
+        authenticForce = currentLevel*10 + 220
 
-    return symbol
+        #레벨 업까지 남은 개수
+        countsToNextLevel = currentLevelMaxValue - currentValue
 
+        #레벨 업까지 남은 일수
+        daysToNextLevel = math.ceil(countsToNextLevel/5)
+
+        #레벨 업 날짜
+        dateToNextLevel = today + timedelta(days=daysToNextLevel)
+        dateToNextLevel = datetime.strftime(dateToNextLevel,'%Y.%m.%d')
+
+        result[symbolName] = {}
+        symbols = result[symbolName]
+
+        symbols["currentLevel"] = currentLevel
+        symbols["currentValue"] = currentValue
+        symbols["currentLevelMaxValue"] = currentLevelMaxValue
+        symbols["countsToNextLevel"] = countsToNextLevel
+        symbols["daysToNextLevel"] = daysToNextLevel
+        symbols["dateToNextLevel"] = dateToNextLevel
+        symbols["authenticForce"] = authenticForce
+
+        return result
 
 @app.get("/")
 async def root():
-    symbolCount()
-    return {"date": symbol['date'],
-            "currentLevel" : symbol['currentLevel'], 
-            "currentValue" : symbol['currentValue'],
-            "currentLevelMaxValue" : symbol['currentLevelMaxValue'],
-            "countsToNextLevel" : symbol['countsToNextLevel'],
-            "daysToNextLevel" : symbol['daysToNextLevel'],
-            "dateToNextLevel" : symbol['dateToNextLevel'],
-            'authenticForce' : symbol['authenticForce'],
-            }
+    symbolData = getSymbolData()
+    json_str = json.dumps(symbolData, indent=4, default=str)
+    return Response(content=json_str, media_type='application/json')
