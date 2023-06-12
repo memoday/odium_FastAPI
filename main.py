@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime, timedelta
 from pytz import timezone
 import math
@@ -8,6 +9,19 @@ import json
 
 app = FastAPI()
 # app.mount("/", StaticFiles(directory="public", html = True), name="static")
+
+origins = [
+    "https://odium.kr",  # Replace with the domain of your client-side code
+    # Add more origins if needed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 def getSymbolData():
     result = {
@@ -32,6 +46,8 @@ def getSymbolData():
 
         #일퀘 개수 추가
         days = today - releaseDate
+        if days < 0:
+            days = 0
         dailyCount = dailyValue * days.days
         
         #현재 심볼값
