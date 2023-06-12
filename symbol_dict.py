@@ -5,7 +5,7 @@ from datetime import datetime
 symbols = { #기본 설정
     "odium" : {
         "startValue" : 742, #첫 심볼 개수
-        "additionValue" : 280, #이벤트 심볼 개수
+        "additionValue" : 380, #이벤트 심볼 개수
         "dailyValue" : 5, #일퀘 개수
         "releaseDate" : datetime.strptime('2022.12.09', '%Y.%m.%d'),
     },
