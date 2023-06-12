@@ -26,6 +26,6 @@ symbols = { #기본 설정
         "startValue" : 0,
         "additionValue" : 0,
         "dailyValue" : 10,
-        "releaseDate" : datetime.strptime('2023.05.01', '%Y.%m.%d'),
+        "releaseDate" : datetime.strptime('2023.08.10', '%Y.%m.%d'),
     },
 }
