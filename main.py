@@ -46,8 +46,8 @@ def getSymbolData():
 
         #일퀘 개수 추가
         days = today - releaseDate
-        if days < 0:
-            days = 0
+        if days.days < 0:
+            days.days = 0
         dailyCount = dailyValue * days.days
         
         #현재 심볼값
