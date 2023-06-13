@@ -12,7 +12,7 @@ app = FastAPI()
 
 origins = [
     "https://odium.kr",  # Replace with the domain of your client-side code
-    # Add more origins if needed
+    "http://127.0.0.1:5502",
 ]
 
 app.add_middleware(
