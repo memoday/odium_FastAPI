@@ -52,8 +52,8 @@ def getSymbolData():
         
         #현재 심볼값
         currentValue = startValue + additionValue + dailyCount
-        if currentValue == startValue:
-            currentValue = 0
+        if (today - releaseDate).days == 0:
+            currentValue = startValue
 
         #현재 심볼 레벨
         while(currentValue > maxLevel[currentLevel]):
