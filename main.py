@@ -52,7 +52,7 @@ def getSymbolData():
         
         #현재 심볼값
         currentValue = startValue + additionValue + dailyCount
-        if (today - releaseDate).days == 0:
+        if today == releaseDate:
             currentValue = startValue
 
         #현재 심볼 레벨
