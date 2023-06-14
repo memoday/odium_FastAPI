@@ -27,13 +27,13 @@ symbols = { #기본 설정
         "startValue" : 10,
         "additionValue" : 0,
         "dailyValue" : 10,
-        "releaseDate" : datetime.strptime('2023.06.14', '%Y.%m.%d'),
+        "releaseDate" : datetime.strptime('2023.08.10', '%Y.%m.%d'),
     },
 }
 
 updates = [
-    ("shangrila", datetime.strptime('2023.06.15', '%Y.%m.%d'), 10), #첫 날 일퀘 개수 추가
-    ("carcion", datetime.strptime('2023.06.14', '%Y.%m.%d'), 10),
+    # ("shangrila", datetime.strptime('2023.06.15', '%Y.%m.%d'), 10), 
+    # ("carcion", datetime.strptime('2023.06.14', '%Y.%m.%d'), 10),
 ]
 
 asia_timezone = pytz.timezone("Asia/Seoul")
