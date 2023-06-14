@@ -11,7 +11,7 @@ symbols = { #기본 설정
         "releaseDate" : datetime.strptime('2022.12.09', '%Y.%m.%d'),
     },
     "shangrila" : { #도원경
-        "startValue" : 0,
+        "startValue" : 10,
         "additionValue" : 0,
         "dailyValue" : 10,
         "releaseDate" : datetime.strptime('2023.06.15', '%Y.%m.%d'),
