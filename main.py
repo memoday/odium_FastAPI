@@ -74,7 +74,7 @@ def getSymbolData():
         countsToNextLevel = currentLevelMaxValue - currentValue
 
         #레벨 업까지 남은 일수
-        daysToNextLevel = math.ceil(countsToNextLevel/5)
+        daysToNextLevel = math.ceil(countsToNextLevel/symbol_data["dailyValue"])
 
         #레벨 업 날짜
         dateToNextLevel = today + timedelta(days=daysToNextLevel)
