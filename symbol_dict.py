@@ -7,7 +7,7 @@ import pytz
 symbols = { #기본 설정
     "odium" : { #오디움
         "startValue" : 2067, #첫 심볼 개수
-        "additionValue" : 0, #이벤트 심볼 개수
+        "additionValue" : 5, #이벤트 심볼 개수
         "dailyValue" : 10, #일퀘 개수
         "releaseDate" : datetime.strptime('2023.06.15', '%Y.%m.%d'),
     },
