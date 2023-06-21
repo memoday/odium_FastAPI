@@ -58,6 +58,9 @@ def getSymbolData():
         if today < releaseDate:
             currentValue = 0
 
+        #누적 심볼 성장치
+        currentCulmativeValue = currentValue
+
         #현재 심볼 레벨
         while(currentValue > maxLevel[currentLevel]):
             currentValue = currentValue - maxLevel[currentLevel]
@@ -84,6 +87,7 @@ def getSymbolData():
         symbols = result[symbolName]
 
         symbols["currentLevel"] = currentLevel
+        symbols["currentCulmativeValue"] = currentCulmativeValue
         symbols["currentValue"] = currentValue
         symbols["currentLevelMaxValue"] = currentLevelMaxValue
         symbols["countsToNextLevel"] = countsToNextLevel
