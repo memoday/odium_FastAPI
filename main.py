@@ -6,6 +6,7 @@ from pytz import timezone
 import math
 import symbol_dict
 import json
+from pydantic import BaseModel, ValidationError
 
 app = FastAPI()
 # app.mount("/", StaticFiles(directory="public", html = True), name="static")
@@ -19,11 +20,11 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET"],
+    allow_methods=["GET","POST"],
     allow_headers=["*"],
 )
 
-def getSymbolData():
+def getSymbolData(updateValue):
     result = {
         'authenticForce' : 220, #세르니움, 아르크스 만렙 적용
     }
@@ -51,7 +52,7 @@ def getSymbolData():
             dailyCount = 0
         
         #현재 심볼값
-        currentValue = startValue + additionValue + dailyCount
+        currentValue = startValue + additionValue + dailyCount + updateValue
 
         if today == releaseDate:
             currentValue = startValue
@@ -98,6 +99,23 @@ def getSymbolData():
 
 @app.get("/")
 async def root():
-    symbolData = getSymbolData()
+    symbolData = getSymbolData(0)
     json_str = json.dumps(symbolData, indent=4, default=str)
     return Response(content=json_str, media_type='application/json')
+
+class additionValue(BaseModel):
+    counts: int
+    symbolName : str
+
+@app.post("/calculator/")
+async def calculate(additionValue: additionValue):
+    try:
+        counts = additionValue.counts
+        symbolData = getSymbolData(counts)
+        symbolData = symbolData[additionValue.symbolName]
+        json_str = json.dumps(symbolData, indent=4, default=str)
+        return Response(content=json_str, media_type='application/json')
+    except Exception as e:
+        print('error')
+
+#POST ex) {"symbolName":"odium","counts":500}
