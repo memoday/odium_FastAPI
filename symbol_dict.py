@@ -13,7 +13,7 @@ symbols = { #기본 설정
     },
     "shangrila" : { #도원경
         "startValue" : 11,
-        "additionValue" : 0,
+        "additionValue" : 460,
         "dailyValue" : 10,
         "releaseDate" : datetime.strptime('2023.06.15', '%Y.%m.%d'),
     },
