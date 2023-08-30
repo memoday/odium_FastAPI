@@ -24,7 +24,7 @@ symbols = { #기본 설정
         "releaseDate" : datetime.strptime('2023.07.13', '%Y.%m.%d'),
     },
     "carcion" : { #카르시온
-        "startValue" : 111,
+        "startValue" : 151,
         "additionValue" : 0,
         "dailyValue" : 10,
         "releaseDate" : datetime.strptime('2023.08.10', '%Y.%m.%d'),
