@@ -7,13 +7,13 @@ import pytz
 symbols = { #기본 설정
     "odium" : { #오디움
         "startValue" : 2067, #첫 심볼 개수
-        "additionValue" : 5, #이벤트 심볼 개수
+        "additionValue" : 75, #이벤트 심볼 개수
         "dailyValue" : 10, #일퀘 개수
         "releaseDate" : datetime.strptime('2023.06.15', '%Y.%m.%d'),
     },
     "shangrila" : { #도원경
         "startValue" : 11,
-        "additionValue" : 460,
+        "additionValue" : 500,
         "dailyValue" : 10,
         "releaseDate" : datetime.strptime('2023.06.15', '%Y.%m.%d'),
     },
@@ -25,7 +25,7 @@ symbols = { #기본 설정
     },
     "carcion" : { #카르시온
         "startValue" : 151,
-        "additionValue" : 0,
+        "additionValue" : 60,
         "dailyValue" : 10,
         "releaseDate" : datetime.strptime('2023.08.10', '%Y.%m.%d'),
     },
